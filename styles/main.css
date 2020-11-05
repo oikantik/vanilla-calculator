@@ -102,6 +102,7 @@ table {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  word-break: break-word;
 }
 
 .display-input {
@@ -120,6 +121,7 @@ table {
 .display-input__first-input {
   color: #8a8a8a;
   margin-right: 0.5rem;
+  word-break: break-word;
 }
 .display-input__operator-input {
   color: #8a8a8a;
@@ -127,6 +129,7 @@ table {
 }
 .display-input__last-input {
   color: #8a8a8a;
+  word-break: break-word;
 }
 
 .numbers-symbols {

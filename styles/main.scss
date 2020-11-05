@@ -28,6 +28,7 @@
         display: flex;
         font-size: 3rem;
         justify-content: flex-end;
+        word-break: break-word;
     }
 }
 
@@ -42,6 +43,7 @@
     &__first-input{
         color:#8a8a8a;
         margin-right: .5rem;
+        word-break: break-word;
     }
 
     &__operator-input {
@@ -51,6 +53,7 @@
 
     &__last-input{
         color:#8a8a8a;
+        word-break: break-word;
     }
 }
 

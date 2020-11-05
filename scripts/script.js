@@ -16,9 +16,10 @@ const clearCalculate = () => {
 };
 
 const clearResult = () => {
-  resultNumber.innerText = "";
-  firstNumber.innerText = "";
-  secondNumber.innerText = "";
+  firstNumber.innerText = "FIRST NUMBER";
+  sign.innerText = "+";
+  secondNumber.innerText = "LAST NUMBER";
+  resultNumber.innerText = "RESULT";
 };
 
 const calculateNumbers = (calculate, firstInput, secondInput) => {
@@ -42,13 +43,13 @@ const calculateNumbers = (calculate, firstInput, secondInput) => {
 
     case "÷":
       result = firstInput / secondInput;
-      resultNumber.innerText = result;
+      result && (resultNumber.innerText = result);
       break;
 
     default:
       break;
   }
-}
+};
 
 document.querySelectorAll("#number").forEach((element) => {
   element.addEventListener("click", (e) => {
@@ -85,18 +86,26 @@ document.querySelector("#equal").addEventListener("click", (e) => {
   //if(firstInput && secondInput && operator)
 });
 
-document.querySelector('#percentage').addEventListener('click', () => {
+document.querySelector("#percentage").addEventListener("click", () => {
   let firstInput = Number(calculate.firstInput.join(""));
-  let secondInput = (Number(calculate.secondInput.join("")) /100) * firstInput;
+  let secondInput = (Number(calculate.secondInput.join("")) / 100) * firstInput;
   calculateNumbers(calculate, firstInput, secondInput);
-  console.log(calculate)
-})
+  console.log(calculate);
+});
 
-document.querySelector('#plusMinus').addEventListener('click', () => {
-  if(calculate.secondInput !== '-') calculate.secondInput.unshift('-');
-})
+document.querySelector("#plusMinus").addEventListener("click", () => {
+  if (calculate.secondInput[0] !== "-") {
+    calculate.secondInput.unshift("-");
+    secondNumber.innerText = calculate.secondInput.join("");
+  } else if (calculate.secondInput[0] === "-") {
+    calculate.secondInput.shift();
+    secondNumber.innerText = calculate.secondInput.join("");
+  }
+
+  console.log(calculate);
+});
 
 document.querySelector("#clear").addEventListener("click", () => {
-  clearCalculate();
   clearResult();
+  clearCalculate();
 });
