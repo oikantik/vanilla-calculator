@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla Calculator</title>
     <link rel="stylesheet" href="./styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <main class="app">
@@ -13,7 +13,7 @@
         <div class="display">
             <div class="display-input">
                 <div class="display-input__first-input" id="first-number"></div>
-                <div class="display-input__operator-input" id="sign">+</div>
+                <div class="display-input__operator-input" id="sign"></div>
                 <div class="display-input__last-input" id="last-number"></div>
             </div>
             
@@ -25,15 +25,15 @@
                 <span class="elements__column" id="number">7</span>
                 <span class="elements__column" id="number">4</span>
                 <span class="elements__column" id="number">1</span>
-                <span class="elements__column" id="number">0</span>
+                <span class="elements__column elements__column--last-item" id="number">0</span>
             </div>
         
             <div class="elements">
-                <span class="elements__column" id="plusMinus">+/-</span>
+                <span class="elements__column" id="plusMinus">±</span>
                 <span class="elements__column" id="number">8</span>
                 <span class="elements__column"  id="number">5</span>
                 <span class="elements__column"  id="number">2</span>
-                <span class="elements__column"></span>
+                <span class="elements__column elements__column--last-item elements__column--inactive"></span>
             </div>
         
             <div class="elements">
@@ -41,14 +41,14 @@
                 <span class="elements__column" id="number">9</span>
                 <span class="elements__column" id="number">6</span>
                 <span class="elements__column" id="number">3</span>
-                <span class="elements__column"></span>
+                <span class="elements__column elements__column--last-item elements__column--inactive"></span>
             </div>
-            <div class="elements">
-                <span class="elements__column" id="operator">÷</span>
-                <span class="elements__column" id="operator">x</span>
-                <span class="elements__column" id="operator">-</span>
-                <span class="elements__column" id="operator">+</span>
-                <span class="elements__column" id="equal">=</span>
+            <div class="elements elements--special">
+                <span class="elements__column elements__column--special" id="operator">÷</span>
+                <span class="elements__column elements__column--special" id="operator">×</span>
+                <span class="elements__column elements__column--special" id="operator">-</span>
+                <span class="elements__column elements__column--special" id="operator">+</span>
+                <span class="elements__column elements__column--special elements__column--last-item" id="equal">=</span>
             </div>
         </div>
     </section>

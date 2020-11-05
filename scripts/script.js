@@ -35,7 +35,7 @@ const calculateNumbers = (calculate, firstInput, secondInput) => {
       resultNumber.innerText = result;
       break;
 
-    case "x":
+    case "×":
       result = firstInput * secondInput;
       resultNumber.innerText = result;
       break;

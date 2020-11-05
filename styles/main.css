@@ -2,6 +2,13 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,6 +27,7 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font-family: "Roboto";
+  font-weight: 300;
   vertical-align: baseline;
 }
 
@@ -54,6 +62,23 @@ table {
 
 .app {
   padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.calculator {
+  -webkit-box-shadow: 5px 5px 20px 10px rgba(0, 0, 0, 0.08);
+          box-shadow: 5px 5px 20px 10px rgba(0, 0, 0, 0.08);
+  width: 280px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .display {
@@ -64,16 +89,44 @@ table {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background-color: #1c1234;
+  min-height: 108px;
 }
 .display__result {
-  padding: 1rem 0;
+  padding: 1rem 1rem 1rem;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 3rem;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
+.display-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 1rem 0rem;
+  font-size: 0.75rem;
+}
 .display-input__first-input {
-  padding: 0 0 1rem 0;
+  color: #8a8a8a;
+  margin-right: 0.5rem;
+}
+.display-input__operator-input {
+  color: #8a8a8a;
+  margin-right: 0.5rem;
 }
 .display-input__last-input {
-  padding: 1rem 0;
+  color: #8a8a8a;
 }
 
 .numbers-symbols {
@@ -90,9 +143,52 @@ table {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.elements--special {
+  background-color: #e98900;
 }
 .elements__column {
-  width: 50px;
-  height: 50px;
+  cursor: pointer;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 70px;
+  height: 70px;
+  color: #1c1234;
+  font-size: 2rem;
+}
+.elements__column--special {
+  color: #fff;
+  border-right: none;
+}
+.elements__column--last-item {
+  border-bottom: 0;
+}
+.elements__column--inactive {
+  cursor: default;
+}
+.elements__column--inactive:hover {
+  background-color: inherit !important;
+}
+.elements__column:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }
 /*# sourceMappingURL=main.css.map */
