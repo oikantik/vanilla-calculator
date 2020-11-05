@@ -1,111 +1,137 @@
-let firstNumber = document.querySelector("#first-number");
-let secondNumber = document.querySelector("#last-number");
-let resultNumber = document.querySelector("#result");
-let sign = document.querySelector("#sign");
-
-let calculate = {
-  firstInput: [],
-  secondInput: [],
-  operator: null,
-};
-
-const clearCalculate = () => {
-  calculate.firstInput = [];
-  calculate.secondInput = [];
-  calculate.operator = null;
-};
-
-const clearResult = () => {
-  firstNumber.innerText = "FIRST NUMBER";
-  sign.innerText = "+";
-  secondNumber.innerText = "LAST NUMBER";
-  resultNumber.innerText = "RESULT";
-};
-
-const calculateNumbers = (calculate, firstInput, secondInput) => {
-  let result;
-  switch (calculate.operator) {
-    case "+":
-      result = firstInput + secondInput;
-      console.log(result);
-      resultNumber.innerText = result;
-      break;
-
-    case "-":
-      result = firstInput - secondInput;
-      resultNumber.innerText = result;
-      break;
-
-    case "×":
-      result = firstInput * secondInput;
-      resultNumber.innerText = result;
-      break;
-
-    case "÷":
-      result = firstInput / secondInput;
-      result && (resultNumber.innerText = result);
-      break;
-
-    default:
-      break;
+class Calculator {
+  constructor() {
+    this.firstInput = [];
+    this.secondInput = [];
+    this.operator = null;
+    this.firstNumber = document.querySelector("#first-number");
+    this.secondNumber = document.querySelector("#last-number");
+    this.resultNumber = document.querySelector("#result");
+    this.sign = document.querySelector("#sign");
+    this.numbers = document.querySelectorAll("#number");
+    this.operators = document.querySelectorAll("#operator");
+    this.equal = document.querySelector("#equal");
+    this.percentage = document.querySelector("#percentage");
+    this.plusMinus = document.querySelector("#plusMinus");
+    this.clear = document.querySelector("#clear");
   }
-};
 
-document.querySelectorAll("#number").forEach((element) => {
+  clearCalculate() {
+    this.firstInput = [];
+    this.secondInput = [];
+    this.operator = null;
+  }
+
+  clearResult() {
+    this.firstNumber.innerText = "FIRST NUMBER";
+    this.sign.innerText = "+";
+    this.secondNumber.innerText = "LAST NUMBER";
+    this.resultNumber.innerText = "RESULT";
+  }
+
+  calculateNumbers(firstInput, secondInput) {
+    let result;
+    switch (this.operator) {
+      case "+":
+        result = firstInput + secondInput;
+        console.log(result);
+        this.resultNumber.innerText = result;
+        break;
+
+      case "-":
+        result = firstInput - secondInput;
+        this.resultNumber.innerText = result;
+        break;
+
+      case "×":
+        result = firstInput * secondInput;
+        this.resultNumber.innerText = result;
+        break;
+
+      case "÷":
+        result = firstInput / secondInput;
+        result && (this.resultNumber.innerText = result);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  addToFirstNumber(number) {
+    this.firstInput.push(number);
+    this.firstNumber.innerText = this.firstInput.join("");
+  }
+
+  addToSecondNumber(number) {
+    this.secondInput.push(number);
+    this.secondNumber.innerText = this.secondInput.join("");
+  }
+
+  assignOperator(operator) {
+    this.operator = operator;
+    this.sign.innerText = this.operator;
+  }
+
+  getResult() {
+    let firstInput = Number(this.firstInput.join(""));
+    let secondInput = Number(this.secondInput.join(""));
+    this.calculateNumbers(firstInput, secondInput);
+  }
+
+  getResultOnPercentage() {
+    let firstInput = Number(this.firstInput.join(""));
+    let secondInput = (Number(this.secondInput.join("")) / 100) * firstInput;
+    this.calculateNumbers(firstInput, secondInput);
+  }
+
+  plusMinusHandler() {
+    if (this.secondInput[0] !== "-") {
+      this.secondInput.unshift("-");
+      this.secondNumber.innerText = this.secondInput.join("");
+    } else if (this.secondInput[0] === "-") {
+      this.secondInput.shift();
+      this.secondNumber.innerText = this.secondInput.join("");
+    }
+  }
+}
+
+let calculator = new Calculator();
+
+calculator.numbers.forEach((element) => {
   element.addEventListener("click", (e) => {
-    console.log(e.target.innerText);
     // if first input is null, put a number
-    if (!calculate.operator) {
-      clearResult();
-      calculate.firstInput.push(e.target.innerText);
-      firstNumber.innerText = calculate.firstInput.join("");
+    if (!calculator.operator) {
+      calculator.clearResult();
+      calculator.addToFirstNumber(e.target.innerText);
     }
-    if (calculate.operator) {
-      calculate.secondInput.push(e.target.innerText);
-      secondNumber.innerText = calculate.secondInput.join("");
+    if (calculator.operator) {
+      calculator.addToSecondNumber(e.target.innerText);
     }
-    console.log(calculate);
   });
 });
 
-document.querySelectorAll("#operator").forEach((element) => {
+calculator.operators.forEach((element) => {
   element.addEventListener("click", (e) => {
-    console.log(e.target.innerText);
-    calculate.operator = e.target.innerText;
-    sign.innerText = calculate.operator;
+    if (calculator.firstInput.length)
+      calculator.assignOperator(e.target.innerText);
   });
 });
 
-document.querySelector("#equal").addEventListener("click", (e) => {
+calculator.equal.addEventListener("click", (e) => {
   //convert string to number
-  let firstInput = Number(calculate.firstInput.join(""));
-  let secondInput = Number(calculate.secondInput.join(""));
-  calculateNumbers(calculate, firstInput, secondInput);
-  console.log(firstInput);
-  console.log(secondInput);
+  calculator.getResult();
   //if(firstInput && secondInput && operator)
 });
 
-document.querySelector("#percentage").addEventListener("click", () => {
-  let firstInput = Number(calculate.firstInput.join(""));
-  let secondInput = (Number(calculate.secondInput.join("")) / 100) * firstInput;
-  calculateNumbers(calculate, firstInput, secondInput);
-  console.log(calculate);
+calculator.percentage.addEventListener("click", () => {
+  calculator.getResultOnPercentage();
 });
 
-document.querySelector("#plusMinus").addEventListener("click", () => {
-  if (calculate.secondInput[0] !== "-") {
-    calculate.secondInput.unshift("-");
-    secondNumber.innerText = calculate.secondInput.join("");
-  } else if (calculate.secondInput[0] === "-") {
-    calculate.secondInput.shift();
-    secondNumber.innerText = calculate.secondInput.join("");
-  }
-
-  console.log(calculate);
+calculator.plusMinus.addEventListener("click", () => {
+  calculator.plusMinusHandler();
 });
 
-document.querySelector("#clear").addEventListener("click", () => {
-  clearResult();
-  clearCalculate();
+calculator.clear.addEventListener("click", () => {
+  calculator.clearResult();
+  calculator.clearCalculate();
 });
